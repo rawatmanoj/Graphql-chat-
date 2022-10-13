@@ -1,0 +1,103 @@
+type User {
+  _id: String!
+  email: String!
+  name: String!
+  friends: [friendType]
+  no_of_friends: Int
+  mobile: String
+  imageUrl: String
+  rooms: [String]
+}
+
+type friendType {
+  id: String
+  roomId: String
+}
+
+type Room {
+  _id: String!
+  latestMessage: Message
+  participants: [User]
+  roomName: String
+  roomType: String
+}
+
+type Message {
+  _id: String!
+  sender: String!
+  text: String!
+  roomId: String!
+  messageType: String!
+}
+
+type Query {
+  getUsers: [User]
+  getMessages(roomId: String): [Message]
+  getRooms: [Room]
+  getRoom(roomId: String): Room
+  getPendingRequest(id: String): [getPendingRequestReturnType]
+  getAllFriends(id: String): [getAllFriendsReturnType]
+}
+
+type getAllFriendsReturnType {
+  id: User
+  roomId: String
+}
+
+type Mutation {
+  addMessage(messageInput: MessageInput): Boolean
+  login(token: String): LoginReturn
+  sendFriendRequest(sendFriendRequestInput: sendFriendRequestInput): Boolean
+  removeFriend(userId: String, friendId: String, roomId: String): Boolean
+  responseFriendRequest(
+    responseFriendRequestInput: responseFriendRequestInput
+  ): Boolean
+}
+
+type Subscription {
+  messageAdded(roomId: String): Message
+}
+
+type LoginReturn {
+  token: String
+  _id: String!
+  email: String!
+  name: String!
+  friends: [User]
+  no_of_friends: Int
+  mobile: String
+  imageUrl: String
+}
+
+type getPendingRequestReturnType {
+  _id: String
+  requester: User
+  recipient: User
+}
+input responseFriendRequestInput {
+  friendshipId: String
+  responseType: String
+  requester: UserInput
+  recipient: UserInput
+}
+
+input UserInput {
+  _id: String!
+  email: String!
+  name: String!
+  friends: [String]
+  no_of_friends: Int
+  mobile: String
+  imageUrl: String
+}
+
+input sendFriendRequestInput {
+  requester: String!
+  recipient: String!
+}
+
+input MessageInput {
+  text: String!
+  sender: String!
+  roomId: String!
+}
