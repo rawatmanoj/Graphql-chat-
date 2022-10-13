@@ -60,7 +60,7 @@ connectWithDb()
  server.start().then(()=>{
     server.applyMiddleware({ app });
 
-    const PORT = 4000;
+    const PORT = process.env.PORT || 4000;
     // Now that our HTTP server is fully set up, we can listen to it.
     httpServer.listen(PORT, () => {
       console.log(
