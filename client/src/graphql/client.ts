@@ -17,11 +17,11 @@ import { getAccessToken } from '../utils/auth';
       }
       return forward(operation);
     }),
-    new HttpLink({uri: 'http://localhost:4000/graphql'})
+    new HttpLink({uri: 'https://graphqlchat-3li9fx58k-rawatmanoj97.vercel.app/graphql'})
   ]);
 
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'ws://localhost:4000/graphql',
+  url: 'https://graphqlchat-3li9fx58k-rawatmanoj97.vercel.app/graphql',
 }));
 
 function isSubscription(operation:any) {

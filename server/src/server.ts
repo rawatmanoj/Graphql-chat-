@@ -29,6 +29,10 @@ const wsServer = new WebSocketServer({
 // Save the returned server's info so we can shutdown this server later
 const serverCleanup = useServer({ schema }, wsServer);
 
+app.get('/', (req, res) => {
+    res.send("<center><p><b>Welcome to ANimenation!</b></p></center>");
+});
+
 // Set up ApolloServer.
 const server = new ApolloServer({
   schema,

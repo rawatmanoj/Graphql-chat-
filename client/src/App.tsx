@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import './App.css';
 import Layout from './Layout/Layout';
-import ChatBody from './pages/Chat/ChatBody';
 import Login from './pages/Login/Login';
 
 export const App: React.FunctionComponent = () => {
