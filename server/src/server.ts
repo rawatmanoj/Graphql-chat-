@@ -30,7 +30,7 @@ const wsServer = new WebSocketServer({
 const serverCleanup = useServer({ schema }, wsServer);
 
 app.get('/', (req, res) => {
-    res.send("<center><p><b>Welcome to ANimenation!</b></p></center>");
+    res.send("<center><p><b>Welcome!</b></p></center>");
 });
 
 // Set up ApolloServer.
