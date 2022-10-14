@@ -4,7 +4,7 @@ import express from 'express';
 import fs from "fs";
 import { ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { WebSocketServer } from 'ws';
+import { WebSocketServer } from "ws";
 import { useServer } from 'graphql-ws/lib/use/ws';
 import resolvers from './graphql/resolvers/index';
 import connectWithDb from './config/db';
@@ -64,7 +64,7 @@ connectWithDb()
     // Now that our HTTP server is fully set up, we can listen to it.
     httpServer.listen(PORT, () => {
       console.log(
-        `Server is now running on http://localhost:${PORT}${server.graphqlPath}`,
+        `Server is now running`,
       );
     });
  });
