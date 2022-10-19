@@ -8,6 +8,7 @@ import { WebSocketServer } from "ws";
 import { useServer } from 'graphql-ws/lib/use/ws';
 import resolvers from './graphql/resolvers/index';
 import connectWithDb from './config/db';
+import path from "path"
 require("./Models/Users")
 require('dotenv').config()
 const typeDefs = fs.readFileSync('./src/graphql/typedefs/schema.graphql', { encoding: 'utf8' });
@@ -20,7 +21,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 // server and the ApolloServer to this HTTP server.
 const app = express();
 const httpServer = createServer(app);
-
+app.use(express.static('static'))
 // Create our WebSocket server using the HTTP server we just set up.
 const wsServer = new WebSocketServer({
   server: httpServer,
@@ -29,9 +30,7 @@ const wsServer = new WebSocketServer({
 // Save the returned server's info so we can shutdown this server later
 const serverCleanup = useServer({ schema }, wsServer);
 
-app.get('/', (req, res) => {
-    res.send("<center><p><b>Welcome!</b></p></center>");
-});
+
 
 // Set up ApolloServer.
 const server = new ApolloServer({
@@ -58,13 +57,20 @@ const server = new ApolloServer({
 });
 
 //connect db
+// app.get('*',(res:any,req)=>{
+// 	res.send(path.join(__dirname,'../static/index.html'))
+// })
+
+app.get('*', (req, res) => {
+  res.send("<center><p><b>Welcome!</b></p></center>");
+});
 
 connectWithDb()
 
  server.start().then(()=>{
     server.applyMiddleware({ app });
 
-    const PORT = process.env.PORT || 4000;
+    const PORT = 1337;
     // Now that our HTTP server is fully set up, we can listen to it.
     httpServer.listen(PORT, () => {
       console.log(
