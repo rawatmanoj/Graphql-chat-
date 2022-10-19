@@ -6,10 +6,10 @@ import { ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageLocalDe
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from "ws";
 import { useServer } from 'graphql-ws/lib/use/ws';
-import resolvers from './graphql/resolvers/index';
-import connectWithDb from './config/db';
+import resolvers from './src/graphql/resolvers/index';
+import connectWithDb from './src/config/db';
 import path from "path"
-require("./Models/Users")
+require("./src/Models/Users")
 require('dotenv').config()
 const typeDefs = fs.readFileSync('./src/graphql/typedefs/schema.graphql', { encoding: 'utf8' });
 
